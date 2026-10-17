@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Registrazione Ospiti – Residenza Tiglio</title>
+<style>
+:root{--bg:#f6f3ec;--card:#fff;--tx:#1d2a24;--mut:#5d6b63;--gr:#1a6b45;--rd:#c8232f;--bd:#d9d4c7;--soft:#eef5f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14201a;--card:#1d2c24;--tx:#eef2ee;--mut:#a3b3a9;--gr:#4cc08a;--rd:#ef5560;--bd:#37493e;--soft:#223a2d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14201a;--card:#1d2c24;--tx:#eef2ee;--mut:#a3b3a9;--gr:#4cc08a;--rd:#ef5560;--bd:#37493e;--soft:#223a2d;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{background:#1a6b45;color:#fff;padding:22px 18px;text-align:center;border-bottom:4px solid #c8232f}
+header h1{margin:0;font-size:22px;letter-spacing:.5px}header p{margin:4px 0 0;opacity:.9;font-size:14px}
+#langs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}#langs button{padding:7px 12px;font-size:14px;border-radius:999px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.55)}#langs button.on{background:#fff;color:#1a6b45}
+main{max-width:760px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+h2{font-size:18px;margin:0 0 10px;color:var(--gr)}
+.note{background:var(--soft);border-left:4px solid var(--gr);padding:10px 12px;border-radius:6px;font-size:14px;margin:10px 0}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:520px){.g{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:600;color:var(--mut);margin-bottom:3px}
+input[type=text],input[type=date],select{width:100%;padding:11px;border:1px solid var(--bd);border-radius:8px;font-size:16px;background:var(--card);color:var(--tx)}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.slot{border:2px dashed var(--bd);border-radius:10px;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--mut);padding:6px;cursor:pointer;position:relative;overflow:hidden}
+.slot b{display:block;font-size:13px;color:var(--tx)}.slot input{display:none}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.ok{border-style:solid;border-color:var(--gr)}
+.ex{display:flex;gap:12px;align-items:center;background:var(--soft);border-radius:10px;padding:10px;font-size:13px}
+.ex svg{flex:none;width:120px;height:auto}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:13px 18px;cursor:pointer}
+.pri{background:var(--rd);color:#fff;width:100%}.sec{background:var(--soft);color:var(--gr);border:1px solid var(--gr)}
+.rm{background:none;color:var(--rd);padding:4px 8px;font-size:13px}
+.ph-h{display:flex;justify-content:space-between;align-items:center}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px}.chk input{width:22px;height:22px;flex:none;margin-top:2px}
+#err{color:var(--rd);font-size:14px;font-weight:600;margin:10px 0;white-space:pre-line}
+.acts{display:grid;gap:10px;margin:14px 0}
+/* riepilogo */
+#sum{display:none}
+.sheet{background:#fff;color:#111;border:1px solid #bbb;padding:14px;font-size:12px}
+.sheet h3{margin:0;font-size:16px;text-align:center;color:#1a6b45}.sheet .sub{text-align:center;font-size:11px;margin-bottom:10px;color:#444}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:8px}@media(max-width:620px){.pg{grid-template-columns:1fr}}
+.pb{border:1px solid #999;padding:8px;break-inside:avoid}
+.pb h4{margin:0 0 5px;font-size:13px;background:#1a6b45;color:#fff;padding:3px 6px}
+.pb table{width:100%;border-collapse:collapse;font-size:11px}.pb td{padding:1.5px 3px;vertical-align:top}.pb td:first-child{color:#555;width:38%}.pb td:last-child{font-weight:600}
+.th{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:6px}.th img{width:100%;height:80px;object-fit:cover;border:1px solid #aaa}
+td[contenteditable]:empty{background:#fff3cd}td[contenteditable]:empty::after{content:"da compilare";color:#a60;font-weight:400}
+.ft{margin-top:8px;font-size:10px;color:#444;text-align:center}
+@media print{@page{size:A4;margin:8mm}body{background:#fff}header,#frm,.acts,.noprint{display:none!important}#sum{display:block!important}main{padding:0;max-width:none}.sheet{border:0;padding:0}.th img{height:70px}.pg{grid-template-columns:1fr 1fr!important}}
+</style>
+</head>
+<body>
+<header><h1>RESIDENZA TIGLIO</h1><p><span data-t="sub">Registrazione ospiti</span> · Jesolo (VE) · CIN IT027019C2FD5N36JH</p><div id="langs" role="group" aria-label="Lingua / Language"></div></header>
+<main>
+<div id="frm">
+<div class="card">
+<h2 data-t="how">Come funziona</h2>
+<p data-t="intro" style="margin:0 0 8px">Per legge ogni ospite deve essere registrato con un documento valido. Basta caricare le foto dei documenti di ciascun ospite (massimo 6): i dati verranno letti automaticamente dalle foto.</p>
+<div class="note" data-t="note1"><b>Per ogni persona servono 3 foto, nessun dato da scrivere:</b> 1) documento fronte, 2) documento retro, 3) selfie con il documento accanto al viso. Il documento deve essere leggibile e il viso ben visibile.</div>
+<div class="ex">
+<svg viewBox="0 0 120 80" aria-hidden="true"><rect width="120" height="80" rx="8" fill="#cfe3d7"/><circle cx="38" cy="30" r="14" fill="#e8c4a0"/><path d="M12 80c0-22 12-30 26-30s26 8 26 30z" fill="#1a6b45"/><rect x="68" y="30" width="42" height="28" rx="3" fill="#fff" stroke="#1a6b45" stroke-width="2"/><circle cx="78" cy="40" r="5" fill="#9bb"/><path d="M87 38h18M87 44h18M74 51h30" stroke="#999" stroke-width="2"/></svg>
+<div data-t="ex"><b>Esempio selfie:</b> il viso e il documento aperto nella stessa foto, uno accanto all'altro, a fuoco e senza riflessi.</div>
+</div>
+</div>
+<div id="people"></div>
+<button class="sec" id="add" data-t="add" style="width:100%;margin-bottom:16px">+ Aggiungi ospite</button>
+<div class="card">
+<label class="chk"><input type="checkbox" id="priv"><span data-t="priv">Dichiaro che i dati e i documenti forniti sono veritieri e autorizzo la Residenza Tiglio a utilizzarli <b>esclusivamente ai fini delle registrazioni obbligatorie degli ospiti</b> previste dalla legge (art. 109 TULPS). Ho letto l'informativa sulla privacy.</span></label>
+<div class="note" data-t="pn">🔒 <b>Privacy:</b> le foto vengono lette da un assistente automatico (Claude) al solo scopo di estrarre i dati. In conformità al Regolamento UE 2016/679 (GDPR) e al D.Lgs. 196/2003, nessun dato verrà ceduto o diffuso a terzi. I dati sono trattati dalla struttura solo per gli obblighi di legge e conservati per il tempo strettamente necessario.</div>
+<div id="err"></div>
+<button class="pri" id="go" data-t="go">Genera riepilogo</button>
+</div>
+</div>
+
+<div id="sum">
+<div class="card noprint"><h2 data-t="s1">Controlli i dati</h2><p data-t="s2" style="margin:0">I dati sono stati letti dalle foto. Verifichi che siano corretti: toccando un campo si può correggere (quelli gialli vanno compilati). Poi invii il riepilogo a Elisa.</p></div>
+<div class="sheet" id="sheet"></div>
+<div class="acts">
+<button class="pri" id="send" data-t="send">📲 Invia riepilogo a Elisa (WhatsApp)</button>
+<button class="sec" id="print" data-t="print">🖨️ Stampa / Salva PDF</button>
+<button class="sec" id="back" data-t="back">← Modifica i dati</button>
+</div>
+<div class="note noprint" id="hint" data-t="hint">Con «Invia» si apre WhatsApp con i dati e le foto dei documenti da condividere. Se le foto non si allegano, salvi il PDF e lo invii nella stessa chat.</div>
+</div>
+</main>
+<script>
+const MAX=6,WA="393498776689";
+const D={it:{n:"Italiano",sub:"Registrazione ospiti",how:"Come funziona",intro:"Per legge ogni ospite deve essere registrato con un documento valido. Basta caricare le foto dei documenti di ciascun ospite (massimo 6): i dati verranno letti automaticamente dalle foto.",note1:"<b>Per ogni persona servono 3 foto, nessun dato da scrivere:</b> 1) documento fronte, 2) documento retro, 3) selfie con il documento accanto al viso. Il documento deve essere leggibile e il viso ben visibile.",ex:"<b>Esempio selfie:</b> il viso e il documento aperto nella stessa foto, uno accanto all'altro, a fuoco e senza riflessi.",add:"+ Aggiungi ospite",priv:"Dichiaro che i dati e i documenti forniti sono veritieri e autorizzo la Residenza Tiglio a utilizzarli <b>esclusivamente ai fini delle registrazioni obbligatorie degli ospiti</b> previste dalla legge (art. 109 TULPS). Ho letto l'informativa sulla privacy.",pn:"🔒 <b>Privacy:</b> le foto vengono lette da un assistente automatico (Claude) al solo scopo di estrarre i dati. In conformità al Regolamento UE 2016/679 (GDPR) e al D.Lgs. 196/2003, nessun dato verrà ceduto o diffuso a terzi. I dati sono trattati dalla struttura solo per gli obblighi di legge e conservati per il tempo strettamente necessario.",go:"Genera riepilogo",rd:"Lettura documento",na:"Lettura automatica non disponibile: i dati si possono scrivere direttamente nel riepilogo.",s1:"Controlli i dati",s2:"I dati sono stati letti dalle foto. Verifichi che siano corretti: toccando un campo si può correggere (quelli gialli vanno compilati). Poi invii il riepilogo a Elisa.",send:"📲 Invia riepilogo a Elisa (WhatsApp)",print:"🖨️ Stampa / Salva PDF",back:"← Modifica i dati",hint:"Con «Invia» si apre WhatsApp con i dati e le foto dei documenti da condividere. Se le foto non si allegano, salvi il PDF e lo invii nella stessa chat.",hint2:"Aperto WhatsApp con i dati. Per le foto: tocchi «Stampa / Salva PDF» e invii il PDF nella stessa chat.",gl:"Ospite",rm:"Rimuovi",up:"Carichi le 3 foto di questo ospite",sl:{front:"Documento fronte",back:"Documento retro",selfie:"Selfie con documento"},mp:"foto mancanti:",ec:"Occorre accettare il trattamento dei dati."},
+en:{n:"English",sub:"Guest registration",how:"How it works",intro:"By law every guest must be registered with a valid ID. Just upload the photos of each guest's document (up to 6): the data will be read automatically from the photos.",note1:"<b>3 photos per person, nothing to type:</b> 1) document front, 2) document back, 3) selfie with the document next to your face. The document must be readable and the face clearly visible.",ex:"<b>Selfie example:</b> your face and the open document in the same photo, side by side, in focus and without glare.",add:"+ Add guest",priv:"I declare that the data and documents provided are true and authorise Residenza Tiglio to use them <b>solely for the mandatory guest registration</b> required by law (art. 109 TULPS). I have read the privacy notice.",pn:"🔒 <b>Privacy:</b> the photos are read by an automated assistant (Claude) only to extract the data. In accordance with EU Regulation 2016/679 (GDPR) and Italian Legislative Decree 196/2003, no data will be sold or shared with third parties. Data is processed by the property only for legal obligations and kept only as long as strictly necessary.",go:"Generate summary",rd:"Reading document",na:"Automatic reading is not available: you can type the data directly in the summary.",s1:"Check the data",s2:"The data was read from the photos. Please check it: tap a field to correct it (yellow fields must be filled in). Then send the summary to Elisa.",send:"📲 Send summary to Elisa (WhatsApp)",print:"🖨️ Print / Save as PDF",back:"← Edit",hint:"“Send” opens WhatsApp with the data and the document photos to share. If photos are not attached, save the PDF and send it in the same chat.",hint2:"WhatsApp opened with the data. For the photos: tap “Print / Save as PDF” and send the PDF in the same chat.",gl:"Guest",rm:"Remove",up:"Upload the 3 photos for this guest",sl:{front:"Document front",back:"Document back",selfie:"Selfie with document"},mp:"missing photos:",ec:"Please accept the data processing consent."},
+de:{n:"Deutsch",sub:"Gästeregistrierung",how:"So funktioniert's",intro:"Gesetzlich muss jeder Gast mit einem gültigen Ausweis registriert werden. Laden Sie einfach die Fotos der Ausweise jedes Gastes hoch (max. 6): Die Daten werden automatisch aus den Fotos gelesen.",note1:"<b>3 Fotos pro Person, nichts zu tippen:</b> 1) Vorderseite, 2) Rückseite, 3) Selfie mit dem Ausweis neben dem Gesicht. Der Ausweis muss lesbar und das Gesicht gut sichtbar sein.",ex:"<b>Selfie-Beispiel:</b> Gesicht und geöffneter Ausweis im selben Foto, nebeneinander, scharf und ohne Spiegelungen.",add:"+ Gast hinzufügen",priv:"Ich erkläre, dass die angegebenen Daten und Dokumente wahrheitsgemäß sind, und ermächtige die Residenza Tiglio, sie <b>ausschließlich für die gesetzlich vorgeschriebene Gästeregistrierung</b> zu verwenden (Art. 109 TULPS). Ich habe die Datenschutzerklärung gelesen.",pn:"🔒 <b>Datenschutz:</b> Die Fotos werden nur zum Auslesen der Daten von einem automatischen Assistenten (Claude) gelesen. Gemäß EU-Verordnung 2016/679 (DSGVO) und italienischem Gesetzesdekret 196/2003 werden keine Daten an Dritte weitergegeben. Die Daten werden nur für gesetzliche Pflichten verarbeitet und nur so lange wie nötig aufbewahrt.",go:"Zusammenfassung erstellen",rd:"Ausweis wird gelesen",na:"Automatisches Lesen nicht verfügbar: Sie können die Daten direkt in der Zusammenfassung eintragen.",s1:"Daten prüfen",s2:"Die Daten wurden aus den Fotos gelesen. Bitte prüfen: Tippen Sie auf ein Feld, um es zu korrigieren (gelbe Felder ausfüllen). Senden Sie die Zusammenfassung dann an Elisa.",send:"📲 Zusammenfassung an Elisa senden (WhatsApp)",print:"🖨️ Drucken / Als PDF speichern",back:"← Bearbeiten",hint:"„Senden“ öffnet WhatsApp mit den Daten und den Ausweisfotos. Falls die Fotos nicht angehängt werden, speichern Sie das PDF und senden es im selben Chat.",hint2:"WhatsApp wurde mit den Daten geöffnet. Für die Fotos: „Drucken / Als PDF speichern“ tippen und das PDF im selben Chat senden.",gl:"Gast",rm:"Entfernen",up:"Laden Sie die 3 Fotos dieses Gastes hoch",sl:{front:"Ausweis Vorderseite",back:"Ausweis Rückseite",selfie:"Selfie mit Ausweis"},mp:"fehlende Fotos:",ec:"Bitte stimmen Sie der Datenverarbeitung zu."},
+fr:{n:"Français",sub:"Enregistrement des clients",how:"Comment ça marche",intro:"La loi impose d'enregistrer chaque client avec une pièce d'identité valide. Il suffit de télécharger les photos des documents de chaque client (6 max.) : les données seront lues automatiquement.",note1:"<b>3 photos par personne, rien à saisir :</b> 1) recto, 2) verso, 3) selfie avec le document à côté du visage. Le document doit être lisible et le visage bien visible.",ex:"<b>Exemple de selfie :</b> visage et document ouvert sur la même photo, côte à côte, net et sans reflets.",add:"+ Ajouter un client",priv:"Je déclare que les données et documents fournis sont exacts et j'autorise la Residenza Tiglio à les utiliser <b>uniquement pour l'enregistrement obligatoire des clients</b> prévu par la loi (art. 109 TULPS). J'ai lu l'information sur la confidentialité.",pn:"🔒 <b>Confidentialité :</b> les photos sont lues par un assistant automatique (Claude) uniquement pour extraire les données. Conformément au Règlement UE 2016/679 (RGPD) et au décret législatif italien 196/2003, aucune donnée ne sera transmise à des tiers. Les données sont traitées uniquement pour les obligations légales et conservées le temps strictement nécessaire.",go:"Générer le récapitulatif",rd:"Lecture du document",na:"Lecture automatique indisponible : vous pouvez saisir les données directement dans le récapitulatif.",s1:"Vérifiez les données",s2:"Les données ont été lues sur les photos. Vérifiez-les : touchez un champ pour le corriger (les champs jaunes sont à remplir). Envoyez ensuite le récapitulatif à Elisa.",send:"📲 Envoyer le récapitulatif à Elisa (WhatsApp)",print:"🖨️ Imprimer / Enregistrer en PDF",back:"← Modifier",hint:"« Envoyer » ouvre WhatsApp avec les données et les photos des documents. Si les photos ne sont pas jointes, enregistrez le PDF et envoyez-le dans la même discussion.",hint2:"WhatsApp ouvert avec les données. Pour les photos : touchez « Imprimer / Enregistrer en PDF » et envoyez le PDF dans la même discussion.",gl:"Client",rm:"Supprimer",up:"Téléchargez les 3 photos de ce client",sl:{front:"Document recto",back:"Document verso",selfie:"Selfie avec document"},mp:"photos manquantes :",ec:"Veuillez accepter le traitement des données."},
+es:{n:"Español",sub:"Registro de huéspedes",how:"Cómo funciona",intro:"Por ley, todo huésped debe registrarse con un documento válido. Solo tiene que subir las fotos del documento de cada huésped (máx. 6): los datos se leerán automáticamente.",note1:"<b>3 fotos por persona, sin escribir nada:</b> 1) documento anverso, 2) reverso, 3) selfie con el documento junto a la cara. El documento debe ser legible y la cara bien visible.",ex:"<b>Ejemplo de selfie:</b> cara y documento abierto en la misma foto, uno junto al otro, enfocado y sin reflejos.",add:"+ Añadir huésped",priv:"Declaro que los datos y documentos facilitados son veraces y autorizo a Residenza Tiglio a utilizarlos <b>únicamente para el registro obligatorio de huéspedes</b> exigido por la ley (art. 109 TULPS). He leído la información sobre privacidad.",pn:"🔒 <b>Privacidad:</b> las fotos las lee un asistente automático (Claude) solo para extraer los datos. Conforme al Reglamento UE 2016/679 (RGPD) y al Decreto Legislativo italiano 196/2003, ningún dato se cederá a terceros. Los datos se tratan solo para obligaciones legales y se conservan el tiempo estrictamente necesario.",go:"Generar resumen",rd:"Leyendo documento",na:"Lectura automática no disponible: puede escribir los datos directamente en el resumen.",s1:"Revise los datos",s2:"Los datos se han leído de las fotos. Compruébelos: toque un campo para corregirlo (los campos amarillos hay que rellenarlos). Después envíe el resumen a Elisa.",send:"📲 Enviar resumen a Elisa (WhatsApp)",print:"🖨️ Imprimir / Guardar PDF",back:"← Editar",hint:"«Enviar» abre WhatsApp con los datos y las fotos de los documentos. Si no se adjuntan las fotos, guarde el PDF y envíelo en el mismo chat.",hint2:"WhatsApp abierto con los datos. Para las fotos: toque «Imprimir / Guardar PDF» y envíe el PDF en el mismo chat.",gl:"Huésped",rm:"Quitar",up:"Suba las 3 fotos de este huésped",sl:{front:"Documento anverso",back:"Documento reverso",selfie:"Selfie con documento"},mp:"faltan fotos:",ec:"Acepte el tratamiento de datos."},
+nl:{n:"Nederlands",sub:"Gastenregistratie",how:"Hoe werkt het",intro:"Volgens de wet moet elke gast met een geldig identiteitsbewijs worden geregistreerd. Upload gewoon de foto's van het document van elke gast (max. 6): de gegevens worden automatisch uit de foto's gelezen.",note1:"<b>3 foto's per persoon, niets om in te typen:</b> 1) voorkant, 2) achterkant, 3) selfie met het document naast uw gezicht. Het document moet leesbaar zijn en het gezicht goed zichtbaar.",ex:"<b>Voorbeeld selfie:</b> gezicht en geopend document op dezelfde foto, naast elkaar, scherp en zonder reflecties.",add:"+ Gast toevoegen",priv:"Ik verklaar dat de verstrekte gegevens en documenten waar zijn en geef Residenza Tiglio toestemming ze <b>uitsluitend te gebruiken voor de wettelijk verplichte gastenregistratie</b> (art. 109 TULPS). Ik heb de privacyverklaring gelezen.",pn:"🔒 <b>Privacy:</b> de foto's worden alleen door een automatische assistent (Claude) gelezen om de gegevens te halen. Conform EU-Verordening 2016/679 (AVG) en het Italiaanse wetsbesluit 196/2003 worden geen gegevens aan derden verstrekt. Gegevens worden alleen voor wettelijke verplichtingen verwerkt en niet langer bewaard dan nodig.",go:"Overzicht maken",rd:"Document lezen",na:"Automatisch lezen niet beschikbaar: u kunt de gegevens direct in het overzicht invullen.",s1:"Controleer de gegevens",s2:"De gegevens zijn uit de foto's gelezen. Controleer ze: tik op een veld om te corrigeren (gele velden invullen). Stuur het overzicht daarna naar Elisa.",send:"📲 Overzicht naar Elisa sturen (WhatsApp)",print:"🖨️ Afdrukken / Opslaan als PDF",back:"← Aanpassen",hint:"“Sturen” opent WhatsApp met de gegevens en de documentfoto's. Worden de foto's niet toegevoegd, sla dan de PDF op en stuur die in dezelfde chat.",hint2:"WhatsApp geopend met de gegevens. Voor de foto's: tik op “Afdrukken / Opslaan als PDF” en stuur de PDF in dezelfde chat.",gl:"Gast",rm:"Verwijderen",up:"Upload de 3 foto's van deze gast",sl:{front:"Document voorkant",back:"Document achterkant",selfie:"Selfie met document"},mp:"ontbrekende foto's:",ec:"Ga akkoord met de gegevensverwerking."},
+pl:{n:"Polski",sub:"Rejestracja gości",how:"Jak to działa",intro:"Zgodnie z prawem każdy gość musi być zarejestrowany na podstawie ważnego dokumentu. Wystarczy przesłać zdjęcia dokumentu każdego gościa (maks. 6): dane zostaną odczytane automatycznie ze zdjęć.",note1:"<b>3 zdjęcia na osobę, nic nie trzeba wpisywać:</b> 1) przód dokumentu, 2) tył, 3) selfie z dokumentem obok twarzy. Dokument musi być czytelny, a twarz dobrze widoczna.",ex:"<b>Przykład selfie:</b> twarz i otwarty dokument na jednym zdjęciu, obok siebie, ostre i bez odblasków.",add:"+ Dodaj gościa",priv:"Oświadczam, że podane dane i dokumenty są prawdziwe, i upoważniam Residenza Tiglio do wykorzystania ich <b>wyłącznie w celu obowiązkowej rejestracji gości</b> wymaganej przepisami (art. 109 TULPS). Zapoznałem(-am) się z informacją o prywatności.",pn:"🔒 <b>Prywatność:</b> zdjęcia są odczytywane przez automatycznego asystenta (Claude) wyłącznie w celu odczytania danych. Zgodnie z rozporządzeniem UE 2016/679 (RODO) i włoskim dekretem 196/2003 żadne dane nie zostaną udostępnione osobom trzecim. Dane są przetwarzane tylko w celu wypełnienia obowiązków prawnych i przechowywane tak długo, jak to konieczne.",go:"Utwórz podsumowanie",rd:"Odczyt dokumentu",na:"Automatyczny odczyt niedostępny: dane można wpisać bezpośrednio w podsumowaniu.",s1:"Sprawdź dane",s2:"Dane zostały odczytane ze zdjęć. Sprawdź je: dotknij pola, aby poprawić (żółte pola należy uzupełnić). Następnie wyślij podsumowanie do Elisy.",send:"📲 Wyślij podsumowanie do Elisy (WhatsApp)",print:"🖨️ Drukuj / Zapisz jako PDF",back:"← Edytuj",hint:"„Wyślij” otwiera WhatsApp z danymi i zdjęciami dokumentów. Jeśli zdjęcia się nie załączą, zapisz PDF i wyślij go w tym samym czacie.",hint2:"Otwarto WhatsApp z danymi. Zdjęcia: dotknij „Drukuj / Zapisz jako PDF” i wyślij PDF w tym samym czacie.",gl:"Gość",rm:"Usuń",up:"Prześlij 3 zdjęcia tego gościa",sl:{front:"Dokument przód",back:"Dokument tył",selfie:"Selfie z dokumentem"},mp:"brakujące zdjęcia:",ec:"Zaakceptuj przetwarzanie danych."}};
+let L=(navigator.language||"it").slice(0,2);if(!D[L])L="it";
+const T=()=>D[L];
+function applyLang(){const t=T();document.documentElement.lang=L;
+ document.querySelectorAll("[data-t]").forEach(e=>e.innerHTML=t[e.dataset.t]);
+ document.querySelectorAll(".gl").forEach(e=>e.textContent=t.gl);
+ document.querySelectorAll("button.rm").forEach(e=>e.textContent=t.rm);
+ document.querySelectorAll("label.up").forEach(e=>e.textContent=t.up);
+ document.querySelectorAll(".slot").forEach(s=>s.querySelector(".sl").textContent=t.sl[s.dataset.s]);
+ document.querySelectorAll("#langs button").forEach(b=>b.classList.toggle("on",b.dataset.k===L));
+ $("#err").textContent=""}
+(function(){const s=document.querySelector("#langs"),fl={it:"🇮🇹",en:"🇬🇧",de:"🇩🇪",fr:"🇫🇷",es:"🇪🇸",nl:"🇳🇱",pl:"🇵🇱"};Object.keys(D).forEach(k=>{const b=document.createElement("button");b.type="button";b.dataset.k=k;b.textContent=(fl[k]||"")+" "+D[k].n;b.onclick=()=>{L=k;applyLang()};s.appendChild(b)})})();
+const F=[["nome","Nome"],["cognome","Cognome"],["nascita","Data di nascita","date"],["luogoN","Luogo di nascita"],["residenza","Residenza (via, città, paese)","text","full"],["cittadinanza","Cittadinanza"],["tipo","Tipo documento","sel"],["numero","N. documento"],["scad","Scadenza documento","date"]];
+const SL=[["front","Documento fronte"],["back","Documento retro"],["selfie","Selfie con documento"]];
+let n=0;const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fd=d=>d?d.split("-").reverse().join("/"):"";
+function addPerson(){
+ const box=$("#people");if(box.children.length>=MAX)return;
+ n++;const c=document.createElement("div");c.className="card";c._img={};
+ let h=`<div class="ph-h"><h2><span class="gl">${T().gl}</span> <span class="num"></span></h2><button class="rm">${T().rm}</button></div><label class="up">${T().up}</label><div class="ph">`;
+ SL.forEach(([k,l],i)=>h+=`<label class="slot" data-s="${k}"><b>${i+1}</b><span class="sl">${T().sl[k]}</span><input type="file" accept="image/*"></label>`);
+ c.innerHTML=h+`</div>`;
+ c.querySelector(".rm").onclick=()=>{c.remove();num()};
+ c.querySelectorAll(".slot").forEach(s=>s.querySelector("input").onchange=e=>load(e.target.files[0],s,c));
+ box.appendChild(c);num();
+}
+function num(){[...$("#people").children].forEach((c,i)=>c.querySelector(".num").textContent=i+1);$("#add").style.display=$("#people").children.length>=MAX?"none":"block";$("#people").querySelectorAll(".rm").forEach((b,_,a)=>b.style.display=a.length>1?"":"none")}
+function load(file,slot,c){
+ if(!file)return;const r=new FileReader();
+ r.onload=()=>{const im=new Image();im.onload=()=>{const m=1000,s=Math.min(1,m/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=im.width*s;cv.height=im.height*s;cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);const u=cv.toDataURL("image/jpeg",.8);c._img[slot.dataset.s]=u;slot.querySelector("img")?.remove();const t=document.createElement("img");t.src=u;slot.appendChild(t);slot.classList.add("ok")};im.src=r.result};
+ r.readAsDataURL(file);
+}
+function collect(){return[...$("#people").children].map(c=>{const o={img:c._img};c.querySelectorAll("[data-k]").forEach(i=>o[i.dataset.k]=i.value.trim());return o})}
+function validate(P){
+ const e=[];P.forEach((p,i)=>{const m=[];SL.forEach(([k])=>{if(!p.img[k])m.push(T().sl[k])});if(m.length)e.push(`${T().gl} ${i+1}: ${T().mp} ${m.join(", ")}`)});
+ if(!$("#priv").checked)e.push(T().ec);return e;
+}
+let DATA=[];
+const PROMPT="Sei un assistente che trascrive documenti d'identità per la registrazione obbligatoria degli ospiti di una struttura ricettiva. Le immagini sono fronte e retro di una carta d'identità o di un passaporto. Leggi i dati e rispondi SOLO con un oggetto JSON con queste chiavi (stringhe): nome, cognome, nascita (formato AAAA-MM-GG), luogoN (luogo di nascita), residenza (via, comune, provincia: spesso sul retro della carta), cittadinanza, tipo (\"Carta d'identità\" oppure \"Passaporto\"), numero (numero documento), scad (scadenza, formato AAAA-MM-GG). Se un dato non è leggibile con certezza usa una stringa vuota: non inventare nulla.";
+$("#go").onclick=async()=>{
+ const P=collect(),e=validate(P);$("#err").textContent=e.join("\n");if(e.length)return;
+ const b=$("#go");b.disabled=true;
+ let sm=null;try{sm=await claude.use("sample")}catch(_){}
+ let ok=false;try{ok=!!sm&&!!(await sm.limits()).images}catch(_){}
+ if(!ok)$("#err").textContent=T().na;
+ for(let i=0;i<P.length;i++){
+  Object.assign(P[i],{nome:"",cognome:"",nascita:"",luogoN:"",residenza:"",cittadinanza:"",tipo:"",numero:"",scad:""});
+  if(!ok)continue;
+  b.textContent=`${T().rd} ${i+1}/${P.length}…`;
+  try{const r=await sm.json(PROMPT,{images:[await toFile(P[i].img.front,"f.jpg"),await toFile(P[i].img.back,"b.jpg")]});for(const [k] of F)if(r&&typeof r[k]==="string")P[i][k]=r[k].trim()}catch(x){if(x&&x.code==="not_granted")ok=false}
+ }
+ b.disabled=false;b.textContent=T().go;
+ DATA=P;const now=new Date().toLocaleString("it-IT");
+ let h=`<h3>RESIDENZA TIGLIO – Registrazione ospiti</h3><div class="sub">Jesolo (VE) · CIN IT027019C2FD5N36JH · Compilato il ${now} · Ospiti: ${P.length}</div><div class="pg">`;
+ P.forEach((p,i)=>{h+=`<div class="pb"><h4>Ospite ${i+1}</h4><table>`+
+ [["Cognome","cognome"],["Nome","nome"],["Data di nascita","nascita"],["Luogo di nascita","luogoN"],["Residenza","residenza"],["Cittadinanza","cittadinanza"],["Documento","tipo"],["N. documento","numero"],["Scadenza","scad"]].map(([a,k])=>`<tr><td>${a}</td><td contenteditable="plaintext-only" data-i="${i}" data-k="${k}">${esc(k==="nascita"||k==="scad"?fd(p[k]):p[k])}</td></tr>`).join("")+
+ `</table><div class="th">${SL.map(([k])=>`<img src="${p.img[k]}" alt="">`).join("")}</div></div>`});
+ h+=`</div><div class="ft">Dati trattati ai sensi del Reg. UE 2016/679 (GDPR) esclusivamente per le registrazioni obbligatorie degli ospiti. Consenso espresso dall'ospite.</div>`;
+ $("#sheet").innerHTML=h;$("#frm").style.display="none";$("#sum").style.display="block";scrollTo(0,0);
+};
+$("#back").onclick=()=>{$("#sum").style.display="none";$("#frm").style.display="block";scrollTo(0,0)};
+$("#print").onclick=()=>{sync();print()};
+function sync(){document.querySelectorAll("td[data-k]").forEach(t=>{DATA[t.dataset.i][t.dataset.k]=t.textContent.trim()})}
+function text(){sync();return "REGISTRAZIONE OSPITI – Residenza Tiglio\n\n"+DATA.map((p,i)=>`OSPITE ${i+1}\n${p.cognome.toUpperCase()} ${p.nome}\nNato/a: ${fd(p.nascita)} a ${p.luogoN}\nResidenza: ${p.residenza}\nCittadinanza: ${p.cittadinanza}\n${p.tipo} n. ${p.numero}, scad. ${fd(p.scad)}`).join("\n\n")+"\n\nConsenso privacy: SI (solo registrazioni obbligatorie)"}
+async function toFile(u,name){const s=atob(u.split(",")[1]),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new File([a],name,{type:"image/jpeg"})}
+$("#send").onclick=async()=>{
+ const t=text();
+ try{
+  const files=[];for(let i=0;i<DATA.length;i++)for(const [k] of SL)files.push(await toFile(DATA[i].img[k],`ospite${i+1}-${k}.jpg`));
+  if(navigator.canShare&&navigator.canShare({files})){await navigator.share({files,text:t,title:"Registrazione ospiti"});return}
+ }catch(e){if(e&&e.name==="AbortError")return}
+ window.open(`https://wa.me/${WA}?text=${encodeURIComponent(t)}`,"_blank");
+ $("#hint").textContent=T().hint2;
+};
+$("#add").onclick=addPerson;addPerson();applyLang();
+</script>
+</body>
+</html>
