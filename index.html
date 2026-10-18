@@ -102,6 +102,7 @@ input[type=file]{display:none}
 </div>
 </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 <script>
 const WA="393498776689",MAX=6,KEYS=["cognome","nome","nascita","luogoN","residenza","cittadinanza","tipo","numero","scad"],ITL=["Cognome","Nome","Data di nascita","Luogo di nascita","Residenza","Cittadinanza","Documento","N. documento","Scadenza"],SK=["front","back","selfie"];
 const D={
@@ -123,7 +124,8 @@ nl:{start:"Beginnen",g:"Gast",fr:"Document voorkant",bk:"Document achterkant",sf
 pl:{start:"Zacznij",g:"Gość",fr:"Dokument przód",bk:"Dokument tył",sf:"Selfie z dokumentem",next:"Dalej",more:"+ Dodaj kolejnego gościa",fin:"Gotowe: utwórz arkusz",reading:"Odczyt dokumentów",rev:"Sprawdź dane",revn:"Dane zostały odczytane ze zdjęć. Jeśli coś jest błędne, dotknij pola i popraw.",noai:"Automatyczny odczyt jest tu niedostępny: arkusz zostanie wysłany bez danych, Elisa je wpisze.",make:"Utwórz arkusz",sv:"Przytrzymaj obraz, aby go zapisać.",max:"Jeden gość po drugim: 3 zdjęcia na osobę (przód, tył, selfie). Maksymalnie 6 gości.",lb:["Nazwisko","Imię","Data urodzenia","Miejsce urodzenia","Miejsce zamieszkania","Obywatelstwo","Rodzaj dokumentu","Nr dokumentu","Ważny do"]}
 };
 const F2={it:{save:"💾 Salva immagine",wa:"💬 Apri WhatsApp con Elisa",fb:"Il foglio non si è allegato da solo. 1) Tocca «Salva immagine» (oppure tieni premuta l'immagine). 2) Apri WhatsApp con Elisa e allega l'immagine salvata."},en:{save:"💾 Save image",wa:"💬 Open WhatsApp with Elisa",fb:"The sheet could not be attached automatically. 1) Tap “Save image” (or press and hold the image). 2) Open WhatsApp with Elisa and attach the saved image."},de:{save:"💾 Bild speichern",wa:"💬 WhatsApp mit Elisa öffnen",fb:"Das Blatt konnte nicht automatisch angehängt werden. 1) „Bild speichern“ tippen (oder Bild gedrückt halten). 2) WhatsApp mit Elisa öffnen und das gespeicherte Bild anhängen."},fr:{save:"💾 Enregistrer l'image",wa:"💬 Ouvrir WhatsApp avec Elisa",fb:"La fiche n'a pas pu être jointe automatiquement. 1) Touchez « Enregistrer l'image » (ou appuyez longuement sur l'image). 2) Ouvrez WhatsApp avec Elisa et joignez l'image enregistrée."},es:{save:"💾 Guardar imagen",wa:"💬 Abrir WhatsApp con Elisa",fb:"La hoja no se pudo adjuntar automáticamente. 1) Toque «Guardar imagen» (o mantenga pulsada la imagen). 2) Abra WhatsApp con Elisa y adjunte la imagen guardada."},nl:{save:"💾 Afbeelding opslaan",wa:"💬 WhatsApp met Elisa openen",fb:"Het blad kon niet automatisch worden toegevoegd. 1) Tik op “Afbeelding opslaan” (of houd de afbeelding ingedrukt). 2) Open WhatsApp met Elisa en voeg de opgeslagen afbeelding toe."},pl:{save:"💾 Zapisz obraz",wa:"💬 Otwórz WhatsApp z Elisą",fb:"Nie udało się automatycznie załączyć arkusza. 1) Dotknij „Zapisz obraz” (lub przytrzymaj obraz). 2) Otwórz WhatsApp z Elisą i załącz zapisany obraz."}};
-Object.keys(E).forEach(k=>Object.assign(D[k],E[k],F2[k]));
+const F3={it:{ocrl:"Preparo la lettura dei documenti (può richiedere un minuto)…",ocrn:"I dati sono stati letti dal telefono e possono contenere errori. Controlli ogni campo e completi quelli vuoti."},en:{ocrl:"Preparing document reading (may take a minute)…",ocrn:"The data was read on your phone and may contain errors. Check every field and fill in any empty ones."},de:{ocrl:"Ausweislesen wird vorbereitet (kann eine Minute dauern) …",ocrn:"Die Daten wurden auf Ihrem Telefon gelesen und können Fehler enthalten. Bitte jedes Feld prüfen und leere Felder ausfüllen."},fr:{ocrl:"Préparation de la lecture (peut prendre une minute)…",ocrn:"Les données ont été lues sur votre téléphone et peuvent contenir des erreurs. Vérifiez chaque champ et complétez les champs vides."},es:{ocrl:"Preparando la lectura (puede tardar un minuto)…",ocrn:"Los datos se han leído en su teléfono y pueden contener errores. Revise cada campo y complete los vacíos."},nl:{ocrl:"Lezen wordt voorbereid (kan een minuut duren)…",ocrn:"De gegevens zijn op uw telefoon gelezen en kunnen fouten bevatten. Controleer elk veld en vul lege velden aan."},pl:{ocrl:"Przygotowanie odczytu (może potrwać minutę)…",ocrn:"Dane zostały odczytane na telefonie i mogą zawierać błędy. Sprawdź każde pole i uzupełnij puste."}};
+Object.keys(E).forEach(k=>Object.assign(D[k],E[k],F2[k],F3[k]));
 const PROMPT="Sei un assistente che trascrive documenti d'identità per la registrazione obbligatoria degli ospiti di una struttura ricettiva. Le immagini sono fronte e retro di una carta d'identità o di un passaporto. Leggi i dati e rispondi SOLO con un oggetto JSON con queste chiavi (stringhe): nome, cognome, nascita (formato AAAA-MM-GG), luogoN (luogo di nascita), residenza (via, comune, provincia: spesso sul retro della carta), cittadinanza, tipo (\"Carta d'identità\" oppure \"Passaporto\"), numero (numero documento), scad (scadenza, formato AAAA-MM-GG). Se un dato non è leggibile con certezza usa una stringa vuota: non inventare nulla.";
 let L=(navigator.language||"it").slice(0,2);if(!D[L])L="it";
 const T=()=>D[L],$=s=>document.querySelector(s);
@@ -156,12 +158,52 @@ async function readAll(){
  return true}
 $("#fin").onclick=async()=>{
  show("s3");$("#fields").innerHTML="";$("#make").style.display="none";$("#prog").textContent=`${T().reading}…`;
- AI=await readAll();
+ AI=await readAll();OCR=false;
+ if(!AI){AI=await ocrAll();OCR=true}
  if(!AI){await autoMake();return}
- if(AI){$("#prog").textContent=T().revn;
+ if(AI){$("#prog").textContent=OCR?T().ocrn:T().revn;
   $("#fields").innerHTML=G.map((g,i)=>`<h2 style="margin-top:14px">${T().g} ${i+1}</h2>`+KEYS.map((k,j)=>`<label>${T().lb[j]}</label><input type="text" data-i="${i}" data-k="${k}" value="${(g.d[k]||"").replace(/"/g,"&quot;")}">`).join("")).join("")}
  else $("#prog").textContent=T().noai;
  $("#make").style.display="block"};
+let OCR=false;
+const to=(p,ms)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error("timeout")),ms))]);
+async function rot(u,deg){const im=await ld(u);if(!im)return u;const s=Math.min(1,1600/Math.max(im.width,im.height)),w=im.width*s,h=im.height*s,c=document.createElement("canvas");c.width=deg%180?h:w;c.height=deg%180?w:h;const x=c.getContext("2d");x.translate(c.width/2,c.height/2);x.rotate(deg*Math.PI/180);x.drawImage(im,-w/2,-h/2,w,h);return c.toDataURL("image/jpeg",.9)}
+const mn=s=>s.replace(/[OQD]/g,"0").replace(/[IL]/g,"1").replace(/Z/g,"2").replace(/S/g,"5").replace(/B/g,"8");
+const NAT={ITA:"Italiana",DEU:"Tedesca",FRA:"Francese",ESP:"Spagnola",NLD:"Olandese",POL:"Polacca",AUT:"Austriaca",CHE:"Svizzera",GBR:"Britannica",USA:"Statunitense",ROU:"Rumena",UKR:"Ucraina",CZE:"Ceca",HUN:"Ungherese",SVK:"Slovacca",SVN:"Slovena",HRV:"Croata",BEL:"Belga",RUS:"Russa",MDA:"Moldava",ALB:"Albanese"};
+function md(s,b){s=mn(s);if(!/^\d{6}$/.test(s))return"";const y=+s.slice(0,2),c=new Date().getFullYear()%100,yy=b?(y>c?1900+y:2000+y):2000+y;return s.slice(4,6)+"/"+s.slice(2,4)+"/"+yy}
+const nm=s=>s.split("<").filter(Boolean).join(" ");
+function parseMRZ(t){
+ const L=t.split("\n").map(l=>l.replace(/[^A-Z0-9<]/g,"")).filter(l=>l.length>=28&&(l.match(/</g)||[]).length>=2);
+ const a=L.filter(l=>l.length<=32),b=L.filter(l=>l.length>=42&&l.length<=46);
+ if(a.length>=3){const [l1,l2,l3]=a.slice(-3).map(l=>l.padEnd(30,"<")),p=l3.split("<<"),n=l2.slice(15,18).replace(/</g,"");
+  const r={cognome:nm(p[0]),nome:nm(p.slice(1).join("<")),nascita:md(l2.slice(0,6),1),scad:md(l2.slice(8,14)),numero:l1.slice(5,14).replace(/</g,""),cittadinanza:NAT[n]||n,tipo:"Carta d'identità"};return r.cognome&&r.nascita?r:null}
+ if(b.length>=2){const [l1,l2]=b.slice(-2).map(l=>l.padEnd(44,"<")),p=l1.slice(5).split("<<"),n=l2.slice(10,13).replace(/</g,"");
+  const r={cognome:nm(p[0]),nome:nm(p.slice(1).join("<")),nascita:md(l2.slice(13,19),1),scad:md(l2.slice(21,27)),numero:l2.slice(0,9).replace(/</g,""),cittadinanza:NAT[n]||n,tipo:"Passaporto"};return r.cognome&&r.nascita?r:null}
+ return null}
+async function vis(w,u,d){
+ await w.setParameters({tessedit_char_whitelist:"",tessedit_pageseg_mode:"3"});
+ const L=(await to(w.recognize(u),60000)).data.text.split("\n").map(s=>s.trim()).filter(Boolean);
+ if(!d.residenza){const i=L.findIndex(l=>/residen/i.test(l));if(i>=0){const c=L.slice(i+1,i+3).filter(l=>l.length>=5&&!/residen|indirizzo|address|cittad|statura|codice|fiscal|emissione/i.test(l));if(c.length)d.residenza=c.join(", ")}}
+ if(!d.luogoN&&d.nascita){const [dd,mm,yy]=d.nascita.split("/"),re=new RegExp(dd+"[ ./\\-]*"+mm+"[ ./\\-]*"+yy),i=L.findIndex(l=>re.test(l));
+  if(i>=0){const cl=s=>s.replace(re,"").replace(/[^A-Za-z\u00c0-\u00ff' ()]/g,"").trim(),bad=/nascita|birth|luogo|place|sesso|sex|date/i;
+   for(const l of [L[i],L[i-1],L[i+1]]){if(l&&!bad.test(cl(l))&&cl(l).replace(/[^A-Za-z]/g,"").length>=3){d.luogoN=cl(l);break}}}}}
+async function ocrAll(){
+ if(typeof Tesseract==="undefined")return false;
+ let w;try{$("#prog").textContent=T().ocrl;w=await to(Tesseract.createWorker("eng"),90000)}catch(_){return false}
+ for(let i=0;i<G.length;i++){
+  const g=G[i];g.d={};let found=null,ang=0;
+  $("#prog").textContent=`${T().reading} ${i+1}/${G.length}\u2026`;
+  try{
+   await w.setParameters({tessedit_char_whitelist:"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<",tessedit_pageseg_mode:"6"});
+   outer:for(const side of ["back","front"])for(const a of [0,90,270,180]){
+    const u=await rot(g.img[side],a),r=parseMRZ((await to(w.recognize(u),60000)).data.text);
+    if(r){found=r;ang=a;break outer}}
+  }catch(_){}
+  if(found){Object.assign(g.d,found);
+   try{for(const side of ["front","back"])await vis(w,await rot(g.img[side],ang),g.d)}catch(_){}}
+ }
+ try{await w.terminate()}catch(_){}
+ return true}
 async function autoMake(){SHEET=await compose();$("#prev").src=SHEET;$("#fb").style.display="none";$("#wa").style.display="none";$("#save").style.display="none";show("s4")}
 function ell(c,s,w){if(c.measureText(s).width<=w)return s;while(s.length>1&&c.measureText(s+"…").width>w)s=s.slice(0,-1);return s+"…"}
 const ld=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=u});
@@ -183,7 +225,7 @@ $("#make").onclick=async()=>{
  $("#make").disabled=true;SHEET=await compose();$("#make").disabled=false;$("#prev").src=SHEET;$("#fb").style.display="none";$("#wa").style.display="none";$("#save").style.display="none";show("s4")};
 const txt=()=>`Registrazione ospiti Residenza Tiglio: riepilogo con ${G.length} ${G.length===1?"ospite":"ospiti"} (dati e foto). Consenso privacy: SI (solo registrazioni obbligatorie).`;
 $("#send").onclick=async()=>{
- try{const f=tf(SHEET,"riepilogo-ospiti.jpg");if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:txt()});return}}catch(e){if(e&&e.name==="AbortError")return}
+ try{const fl=[tf(SHEET,"riepilogo-ospiti.jpg")];G.forEach((g,i)=>SK.forEach(k=>fl.push(tf(g.img[k],`ospite${i+1}-${k}.jpg`))));if(navigator.canShare&&navigator.canShare({files:fl})){await navigator.share({files:fl,text:txt()});return}}catch(e){if(e&&e.name==="AbortError")return}
  $("#fb").style.display="block";$("#wa").style.display="block";$("#save").style.display="block"};
 $("#wa").onclick=()=>window.open(`https://wa.me/${WA}?text=${encodeURIComponent(txt())}`,"_blank");
 $("#save").onclick=async()=>{
